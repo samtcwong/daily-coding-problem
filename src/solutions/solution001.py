@@ -41,6 +41,8 @@ tests = (
     (([1, 3, 2, 4], 6), True),
     # should handle list of 4 elements that match in the middle
     (([1, 3, 2, 4], 5), True),
+    # should handle list of 5 elements that match at both ends
+    (([1, 3, 2, 0, 5], 6), True),
     # should not match when sum to k doesn't exist in list
     (([6, 4, 2, 0], 3), False)
 )
@@ -50,12 +52,12 @@ def any_two_numbers_add_up_to_k(numbers: List, k: int):
     if len(numbers) <= 1:
         return False
 
-    target = set()
+    targets = set()
     for number in numbers:
-        if number in target:
+        if number in targets:
             return True
         new_target = k - number
-        target.add(new_target)
+        targets.add(new_target)
 
     return False
 
