@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Callable, List, Tuple
 
 # Problem #5 [Medium]
 # Good morning! Here's your coding interview problem for today.
@@ -18,5 +18,38 @@ from typing import List
 
 # Implement car and cdr.
 
-tests = None
-solver = None
+
+def cons(a, b):
+    def pair(f):
+        return f(a, b)
+
+    return pair
+
+
+def car(pair):
+    def left(a, _):
+        return a
+
+    return pair(left)
+
+
+def cdr(pair):
+    def right(_, b):
+        return b
+
+    return pair(right)
+
+
+def eval_(function):
+    return function
+
+
+tests = (
+    ((car(cons(3, 4)),), 3),
+    ((cdr(cons(3, 4)),), 4),
+    ((car(cons(-1, 4)),), -1),
+    ((cdr(cons(0, -1)),), -1),
+)
+
+
+solver = eval_

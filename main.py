@@ -26,7 +26,11 @@ def run_tests(solution_id: int, tests, solver) -> None:
     num_tests_failed = 0
     for test_index, test in enumerate(tests):
         inputs, expected_output = test
-        actual_inputs = json.loads(json.dumps(inputs))
+        try:
+            actual_inputs = json.loads(json.dumps(inputs))
+        except Exception:
+            actual_inputs = None
+
         actual_output = solver(*inputs)
         passed = actual_output == expected_output
         if passed:
